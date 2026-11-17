@@ -32,6 +32,12 @@ If you have any bugs or want to do a better implementation, you can use these in
 In the most basic of terms, you MUST attack the entire application linearly, its entire execution, as soon as you hit a stomped condition, you are forced to runtime analysis of all code past it; As soon as you hit unresolvable opaques or any form of heavy runtime reliant obfuscation, you can't reverse ANY FURTHER! <br>
 This means if your entrypoint and everything else is unknown, such as using [self decaying code](https://github.com/IntelSDM/SelfDecayingCode), [Serverside code](https://github.com/IntelSDM/ServerSideCodeExecution), or anything too heavily reliant on runtime information. You are FORCED into runtime analysis for the whole binary! <br>
 
+## What Nessa doesn't support
+
+* Callbacks/hooks
+* Functions with no call trace
+* Polymorphic/ C++ class functions
+
 ## Graphs
 Due to how Nessa works, it is impossible to properly demonstrate it in a tool like IDA. So MS paint will have to do.<br>
 So this is what your normal call graph looks like: <br>
