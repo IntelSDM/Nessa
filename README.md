@@ -49,5 +49,7 @@ Then it creates reliance upwwards(Shown with red "arrows"):
 Then it encrypts all the data in the functions. This removes the calls, jumps, strings and constant data without the full reliance path being built. This removes the xrefs.<br>
 <img width="1455" height="679" alt="image" src="https://github.com/user-attachments/assets/dfa02995-981c-4c46-b147-24bd3f2b7211" /><br>
 Now if you wanted to attack function 10 , you need to know the keys from  Entrypoint, function 2, Function 6. Thats just to attack 1 of the function 10s.<br>
+<br>
 
+As you can clearly see, if Function 10 has no additional obfuscation, but function 6 was running an insane amount of obfuscation, you wouldn't be able to reverse engineer function 10; till function 6 is fully deobfuscated!!
 
