@@ -10,6 +10,7 @@ Nessa uses the following techniques in parallel as part of its obfuscation chain
 * [Return Address Encryption](https://github.com/IntelSDM/RetCryptPass)
 * [Caller Constant Key](https://github.com/IntelSDM/CallerConstKeyChain)
 * [Condition Stomping](https://github.com/IntelSDM/ConditionStompingObfuscation)
+<br>
 If you have any bugs or want to do a better implementation, you can use these independent passes to test. <br>
 
 ## How Nessa Works
@@ -33,3 +34,14 @@ This means if your entrypoint and everything else is unknown, such as using [sel
 
 ## Graphs
 Due to how Nessa works, it is impossible to properly demonstrate it in a tool like IDA. So MS paint will have to do.<br>
+So this is what your normal call graph looks like: <br>
+<img width="1455" height="610" alt="image" src="https://github.com/user-attachments/assets/dffd1719-7d0a-4a3c-b6bd-02f314f08822" />
+Now Nessa takes this and clones the multi xrefs:<br>
+<img width="1455" height="679" alt="image" src="https://github.com/user-attachments/assets/421f4468-8f3a-4384-b6ff-accb2ebc8273" />
+Then it creates reliance upwwards(Shown with red "arrows"):
+<img width="1455" height="679" alt="image" src="https://github.com/user-attachments/assets/4bc66923-894f-4c12-add4-a547cd73ab61" />
+Then it encrypts all the data in the functions. This removes the calls, jumps, strings and constant data without the full reliance path being built. This removes the xrefs.<br>
+<img width="1455" height="679" alt="image" src="https://github.com/user-attachments/assets/dfa02995-981c-4c46-b147-24bd3f2b7211" /><br>
+Now if you wanted to attack function 10 , you need to know the keys from  Entrypoint, function 2, Function 6. Thats just to attack 1 of the function 10s.<br>
+
+
