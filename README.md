@@ -3,7 +3,10 @@ To be exact, and precise; these are the obfuscation issues Nessa fixes:
 
 * Secures code in isolation, you can't attack code in isolation; you must attack the entire call chain to deobfuscate a function.
 * Allows for fast code to execute quickly with the security of its above head call chain, allowing no sacrifices for fast code; maintaining absolute security downstream by securing itself upstream.
-* Forces the entire application to be attacked, flooding context windows as much as possible.
+* Forces the entire application to be attacked, flooding context windows as much as possible. You cannot attack individual functions.
+
+_To be clear; Nessa isn't a complexity obfuscator, it takes your complexity obfuscation passes(such as VMs, opaques and MBA) from above functions and apply their complexity downwards, WITH NO OVERHEAD! This means they must defeat the complex overhead function to get to the fast/unobfuscated functions benath them in the call chain._
+
 
 Nessa uses the following techniques in parallel as part of its obfuscation chain:
 * [TLS Laundering](https://github.com/IntelSDM/TLSLaunderingPass)
@@ -52,4 +55,21 @@ Now if you wanted to attack function 10 , you need to know the keys from  Entryp
 <br>
 
 As you can clearly see, if Function 10 has no additional obfuscation, but function 6 was running an insane amount of obfuscation, you wouldn't be able to reverse engineer function 10; till function 6 is fully deobfuscated!!
+
+
+<img width="1984" height="408" alt="image" src="https://github.com/user-attachments/assets/7c613e86-d9a2-4439-afb8-ee7ff95d1ed5" /> <br>
+<img width="1092" height="653" alt="image" src="https://github.com/user-attachments/assets/0e33561a-c407-4fb2-a2eb-30d7c77de9c1" /> <br>
+<img width="426" height="178" alt="image" src="https://github.com/user-attachments/assets/e9a13339-e655-4725-a837-84d53c97b696" /> <br>
+<img width="837" height="776" alt="image" src="https://github.com/user-attachments/assets/55ee5a0f-dc32-4cf3-be7b-cd28dd406307" /> <br>
+
+
+## How To Build
+* Download [LLVM 19.1](https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.0)
+* Download [VCPKG](https://github.com/microsoft/vcpkg)
+* VCPKG install asmjit
+* Open build.bat in a text editor.
+* Find the LLVM 19.1 references in the command line, Change them to your file path.
+* Find the VCPKG references in the command line, Change them to your file path.
+* Run the build script
+* Build your application with the ``` -load-pass-plugin ``` Param to the FunctionPass.dll
 
